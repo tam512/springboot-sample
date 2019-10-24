@@ -2,6 +2,7 @@ apiVersion: appsody.dev/v1beta1
 kind: AppsodyApplication
 metadata:
   name: springboot-sample
+  namespace: my-project3
 spec:
   # Add fields here
   version: 1.0.0
