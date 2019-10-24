@@ -1,0 +1,30 @@
+apiVersion: appsody.dev/v1beta1
+kind: AppsodyApplication
+metadata:
+  name: springboot-sample
+spec:
+  # Add fields here
+  version: 1.0.0
+  applicationImage: springboot-sample 
+  stack: java-spring-boot2
+  service:
+    type: NodePort
+    port: 8080
+    annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/path: '/actuator/prometheus'
+  readinessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /actuator/health
+      port: 8080
+    initialDelaySeconds: 5
+    periodSeconds: 2
+  livenessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /actuator/liveness
+      port: 8080
+    initialDelaySeconds: 5
+    periodSeconds: 2
+  expose: true
